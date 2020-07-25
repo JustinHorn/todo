@@ -13,7 +13,6 @@ import TodoItem, { turnToDoItem } from "./Data";
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
-  // const [inputText,]
   const [priority, setPriority] = useState("a");
 
   useEffect(() => {
@@ -69,6 +68,100 @@ export default function App() {
     setTodoList(newList);
   };
 
+  class HideAndShowDivOnClick extends React.Component {
+    state = {
+      showDiv: false,
+    };
+
+    onButtonPress(event) {
+      const text = event.target.innerHTML;
+      createInput.current.value = text;
+    }
+
+    render() {
+      const { showDiv } = this.state;
+      return (
+        <div>
+          <button onClick={() => this.setState({ showDiv: !showDiv })}>
+            {showDiv ? "hide" : "show"}
+          </button>
+          {showDiv && (
+            <div id="myDropdown" className="dropdownContent">
+              <div className="list1">
+                <h4>Shopping</h4>
+                <ul>
+                  <li>
+                    <button onClick={this.onButtonPress}>🐄 Milk</button>
+                  </li>
+                  <li>
+                    <button onClick={this.onButtonPress}>zdf</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                </ul>
+              </div>
+              <div className="list2">
+                <h4>Personal</h4>
+                <ul>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                </ul>
+              </div>
+              <div className="list3">
+                <h4>Work</h4>
+                <ul>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                </ul>
+              </div>
+              <div className="list4">
+                <h4>General</h4>
+                <ul>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                  <li>
+                    <button>item</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+  }
+
   return (
     <div className="App">
       <header>
@@ -81,6 +174,7 @@ export default function App() {
       <div className="main">
         <div className="create" id={priority}>
           <h1>New To-do</h1>
+          <HideAndShowDivOnClick />
           <div className="priority">
             <h4>How important is this todo?</h4>
             <form>
@@ -103,10 +197,11 @@ export default function App() {
           </div>
 
           <div className="textbox">
-            <input className="textbox"
+            <input
+              className="textbox"
               ref={createInput}
               name="creationInput"
-              placeholder="What to do next?"
+              placeholder="What to do"
               required
             />
           </div>
