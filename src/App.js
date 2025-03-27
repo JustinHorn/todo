@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
+import { Theme, ThemeNames } from "./enums/Theme";
 
 import TodoLists from "./component/TodoList";
 import { isInputNotEmpty, emptyInput } from "./functional/helper";
@@ -88,7 +89,7 @@ export default function App() {
   };
 
   /*Color templates */
-  const [color, setColor] = useState("dirk-colors");
+  const [color, setColor] = useState(Theme.RADHIKA);
   return (
     <div className={"App " + color}>
       <header>
@@ -127,24 +128,15 @@ export default function App() {
       <footer>
         <h3>Color Themes</h3>
         <div className="footer">
-          <button
-            className="pop-effect-1"
-            onClick={(e) => setColor(e.target.innerHTML + "-colors")}
-          >
-            justin
-          </button>
-          <button
-            className="pop-effect-1"
-            onClick={(e) => setColor(e.target.innerHTML + "-colors")}
-          >
-            dirk
-          </button>
-          <button
-            className="pop-effect-1"
-            onClick={(e) => setColor(e.target.innerHTML + "-colors")}
-          >
-            radhika
-          </button>
+          {Object.entries(ThemeNames).map(([themeValue, themeName]) => (
+            <button
+              key={themeValue}
+              className="pop-effect-1"
+              onClick={() => setColor(themeValue)}
+            >
+              {themeName}
+            </button>
+          ))}
         </div>
       </footer>
     </div>
